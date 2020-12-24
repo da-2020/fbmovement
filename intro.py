@@ -11,9 +11,9 @@ app = dash.Dash(__name__)
 server = app.server
 # ------------------------------------------------------------------------------
 # Import and clean data (importing csv into pandas)
-df = pd.read_csv("FBLOCDENSE_IR_STRIP_AG.csv")
+df = pd.read_csv("intro_bees.csv")
 
-df = df.groupby(['date', 'mov-dev', 'no-move-ratio'])[['no-move-ratio']].mean()
+df = df.groupby(['State', 'ANSI', 'Affected by', 'Year', 'state_code'])[['Pct of Colonies Impacted']].mean()
 df.reset_index(inplace=True)
 print(df[:5])
 
