@@ -18,6 +18,10 @@ df = pd.read_csv("FBLOCDENSE_IR_STRIP_AG.csv")
 #df.reset_index(inplace=True)
 print(df[:5])
 
+dff = df.copy()
+fig = px.bar(dff, x='date', y='mov-dev')
+fig.show()
+
 # ------------------------------------------------------------------------------
 # App layout
 app.layout = html.Div([
@@ -31,9 +35,7 @@ app.layout = html.Div([
 
 ])
 
-dff = df.copy()
-fig = px.bar(dff, x='date', y='mov-dev')
-fig.show()
+
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
