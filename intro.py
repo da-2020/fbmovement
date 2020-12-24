@@ -25,7 +25,7 @@ app.layout = html.Div([
 
     html.Br(),
 
-    dcc.Graph(irqbar)
+    #dcc.Graph(irqbar)
 
 
 ])
