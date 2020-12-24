@@ -31,9 +31,9 @@ app.layout = html.Div([
 
 ])
 
-#dff = df.copy()
-#fig = px.bar(dff, x='date', y='mov-dev')
-#irqbar = fig.show()
+dff = df.copy()
+fig = px.bar(dff, x='date', y='mov-dev')
+irqbar = fig.show()
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
