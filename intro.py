@@ -26,14 +26,14 @@ app.layout = html.Div([
 
     html.Br(),
 
-    #dcc.Graph(irqbar)
+    dcc.Graph(figure=fig)
 
 
 ])
 
 dff = df.copy()
 fig = px.bar(dff, x='date', y='mov-dev')
-irqbar = fig.show()
+fig.show()
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
