@@ -62,7 +62,7 @@ def update_graph(option_slctd):
     # Plotly Express
     fig = px.choropleth(
         data_frame=dff,
-        locationmode='IRQ-states',
+        locationmode='IRQ',
         locations='state_code',
         scope="usa",
         color='Pct of Colonies Impacted',
