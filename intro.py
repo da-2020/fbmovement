@@ -26,11 +26,15 @@ fig.show()
 # App layout
 app.layout = html.Div([
 
-    html.H1("Template Application Daniel Allen", style={'text-align': 'center'}),
+    html.H1("Abu Ghraib Change In Movement Baseline from FEB2020", style={'text-align': 'center'}),
+    html.Br()
+    html.H3("Daniel Allen", style={'text-align': 'center'})
+    html.Br(),
+    html.P("This graph represents a change in baseline measurement of Facebook users in the Abu Ghraib region of Iraq. The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."),
+    html.Br(),
+    html.Link("Data Source", href="https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
 
     html.Br(),
-
-    html.Link("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
 
     dcc.Graph(figure=fig)
 
