@@ -8,7 +8,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 app = dash.Dash(__name__)
-server = app.server
+
 # ------------------------------------------------------------------------------
 # Import and clean data (importing csv into pandas)
 df = pd.read_csv("intro_bees.csv")
@@ -21,7 +21,7 @@ print(df[:5])
 # App layout
 app.layout = html.Div([
 
-    html.H1("Facebook Movement Density in Iraq", style={'text-align': 'center'}),
+    html.H1("Web Application Dashboards with Dash", style={'text-align': 'center'}),
 
     dcc.Dropdown(id="slct_year",
                  options=[
@@ -62,9 +62,9 @@ def update_graph(option_slctd):
     # Plotly Express
     fig = px.choropleth(
         data_frame=dff,
-        locationmode='IRQ',
-        locations='IRQ',
-        scope="irq",
+        locationmode='USA-states',
+        locations='state_code',
+        scope="usa",
         color='Pct of Colonies Impacted',
         hover_data=['State', 'Pct of Colonies Impacted'],
         color_continuous_scale=px.colors.sequential.YlOrRd,
