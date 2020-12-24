@@ -11,9 +11,9 @@ app = dash.Dash(__name__)
 server = app.server
 # ------------------------------------------------------------------------------
 # Import and clean data (importing csv into pandas)
-df = pd.read_csv("intro_bees.csv")
+df = pd.read_csv("FBLOCDENSE_IR_STRIP_AG.csv")
 
-df = df.groupby(['State', 'ANSI', 'Affected by', 'Year', 'state_code'])[['Pct of Colonies Impacted']].mean()
+df = df.groupby(['date', 'mov-dev', 'no-move-ratio'])[['no-move-ratio']].mean()
 df.reset_index(inplace=True)
 print(df[:5])
 
@@ -25,8 +25,14 @@ app.layout = html.Div([
 
     html.Br(),
 
+    dcc.Graph(irqbar)
+
 
 ])
+
+dff = df.copy()
+fig = px.bar(dff, x='date', y='mov-dev')
+irqbar = fig.show()
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
