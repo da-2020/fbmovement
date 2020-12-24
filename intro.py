@@ -64,7 +64,7 @@ def update_graph(option_slctd):
         data_frame=dff,
         locationmode='IRQ',
         locations='state_code',
-        scope="usa",
+        scope="irq",
         color='Pct of Colonies Impacted',
         hover_data=['State', 'Pct of Colonies Impacted'],
         color_continuous_scale=px.colors.sequential.YlOrRd,
