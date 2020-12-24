@@ -63,7 +63,7 @@ def update_graph(option_slctd):
     fig = px.choropleth(
         data_frame=dff,
         locationmode='IRQ',
-        locations='state_code',
+        locations='IRQ',
         scope="irq",
         color='Pct of Colonies Impacted',
         hover_data=['State', 'Pct of Colonies Impacted'],
