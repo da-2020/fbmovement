@@ -11,36 +11,73 @@ app = dash.Dash(__name__)
 server = app.server
 # ------------------------------------------------------------------------------
 # Import and clean data (importing csv into pandas)
-df = pd.read_csv("FBLOCDENSE_IR_STRIP_AG.csv")
-
-#df = df.groupby(['date', 'mov-dev', 'no-move-ratio'])[['no-move-ratio']].mean()
-#df = df.groupby(['State', 'ANSI', 'Affected by', 'Year', 'state_code'])[['Pct of Colonies Impacted']].mean()
-#df.reset_index(inplace=True)
-print(df[:5])
-
-dff = df.copy()
-fig = px.bar(dff, x='date', y='mov-dev')
-fig.show()
+df = pd.read_csv("ir_master_fbdat.csv")
 
 # ------------------------------------------------------------------------------
 # App layout
 app.layout = html.Div([
 
-    html.H1("Abu Ghraib Change In Movement Baseline from FEB2020", style={'text-align': 'center'}),
-    html.Br(),
-    html.H3("Daniel Allen", style={'text-align': 'center'}),
-    html.Br(),
-    html.P("This graph represents a change in baseline measurement of Facebook users' physical movement in the Abu Ghraib region of Iraq. The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."),
-    html.Br(),
-    html.Link("Data Source", href="https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
+    html.H1("Iraq Facebook Users Change In Movement From FEB2020 Baseline By Region", style={'text-align': 'center'}),
 
+    dcc.Dropdown(id="slct_year",
+                 options=[
+                     {"label": "Abu Ghraib", "value": 'Abu Ghraib'},
+                     {"label": "Al Fallujah", "value": 'Al Fallujah'},
+                     {"label": "Al Haditha", "value": 'Al Haditha'}],
+
+
+                 multi=False,
+                 value='Abu Ghraib',
+                 style={'width': "40%"}
+                 ),
+
+    html.Div(id='output_container', children=[]),
     html.Br(),
 
-    dcc.Graph(figure=fig)
-
+    dcc.Graph(id='iraq_chart', figure={})
 
 ])
 
+
+# ------------------------------------------------------------------------------
+# Connect the Plotly graphs with Dash Components
+@app.callback(
+    [Output(component_id='output_container', component_property='children'),
+     Output(component_id='iraq_chart', component_property='figure')],
+    [Input(component_id='slct_region', component_property='value')]
+)
+def update_graph(option_slctd):
+    print(option_slctd)
+    print(type(option_slctd))
+
+    container = "The region chosen by user was: {}".format(option_slctd)
+
+    dff = df.copy()
+    dff = dff[dff["Region"] == option_slctd]
+    #dff = dff[dff["Affected by"] == "Varroa_mites"]
+
+    # Plotly Express
+    fig = px.bar(dff, x='Date', y='Baseline Movement Deviation')
+
+    # Plotly Graph Objects (GO)
+    # fig = go.Figure(
+    #     data=[go.Choropleth(
+    #         locationmode='USA-states',
+    #         locations=dff['state_code'],
+    #         z=dff["Pct of Colonies Impacted"].astype(float),
+    #         colorscale='Reds',
+    #     )]
+    # )
+    #
+    # fig.update_layout(
+    #     title_text="Bees Affected by Mites in the USA",
+    #     title_xanchor="center",
+    #     title_font=dict(size=24),
+    #     title_x=0.5,
+    #     geo=dict(scope='usa'),
+    # )
+
+    return container, fig
 
 
 # ------------------------------------------------------------------------------
