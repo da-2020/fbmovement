@@ -1,3 +1,9 @@
+# ------------------------------------------------------------------------------
+# Iraq Facebook Users Change In Movement From FEB2020 Baseline By Region
+# Code derived from https://github.com/Coding-with-Adam/Dash-by-Plotly/tree/master/Other/Dash_Introduction
+# Modified by Daniel Allen
+# ------------------------------------------------------------------------------
+
 import pandas as pd
 import plotly.express as px  # (version 4.7.0)
 import plotly.graph_objects as go
@@ -18,8 +24,10 @@ df = pd.read_csv("ir_master_fbdat.csv")
 app.layout = html.Div([
 
     html.H1("Iraq Facebook Users Change In Movement From FEB2020 Baseline By Region", style={'text-align': 'center'}),
-
-    dcc.Dropdown(id="slct_year",
+    html.Br(),
+    html.H3("Daniel Allen", style={'text-align': 'center'}),
+    html.Br(),
+    dcc.Dropdown(id="slct_region",
                  options=[
                      {"label": "Abu Ghraib", "value": 'Abu Ghraib'},
                      {"label": "Al Fallujah", "value": 'Al Fallujah'},
@@ -32,6 +40,10 @@ app.layout = html.Div([
                  ),
 
     html.Div(id='output_container', children=[]),
+    html.Br(),
+    html.P("This graph represents a change in baseline measurement of Facebook users' physical movement in various regions of Iraq. The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."),
+    html.Br(),
+    html.Link("Data Source", href="https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.Br(),
 
     dcc.Graph(id='iraq_chart', figure={})
@@ -54,7 +66,6 @@ def update_graph(option_slctd):
 
     dff = df.copy()
     dff = dff[dff["Region"] == option_slctd]
-    #dff = dff[dff["Affected by"] == "Varroa_mites"]
 
     # Plotly Express
     fig = px.bar(dff, x='Date', y='Baseline Movement Deviation')
