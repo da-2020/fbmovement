@@ -17,26 +17,22 @@ app = dash.Dash(__name__)
 server = app.server
 # ------------------------------------------------------------------------------
 # Import and clean data (importing csv into pandas)
-df = pd.read_csv("ir_master_fbdat.csv")
+df = pd.read_csv("ir_master_fbdat_mod1_final.csv")
 
 # ------------------------------------------------------------------------------
 # App layout
 app.layout = html.Div([
 
-    html.H1("Iraq Facebook Users Change In Movement From FEB2020 Baseline By Region", style={'text-align': 'center'}),
+    html.H1("Iraq Facebook Users Change In Movement From FEB2020 Baseline and ACLED Attack Data By Region ", style={'text-align': 'center'}),
     html.Br(),
     html.H3("Daniel Allen", style={'text-align': 'center'}),
     html.Br(),
     dcc.Dropdown(id="slct_region",
                  options=[
-                     #{"label": "Abu Ghraib", "value": 'Abu Ghraib'},
-                     #{"label": "Al Fallujah", "value": 'Al Fallujah'},
-                     #{"label": "Al Haditha", "value": 'Al Haditha'},
-
                      {"label": "Abu Ghraib", "value": "Abu Ghraib"},
                      {"label": "Al Fallujah", "value": "Al Fallujah"},
                      {"label": "Al Haditha", "value": "Al Haditha"},
-                     {"label": "Al Qa'im", "value": "Al Qa'im"},
+                     {"label": "Al Qaim", "value": "Al Qaim"},
                      {"label": "Anah", "value": "Anah"},
                      {"label": "Ar Ramadi", "value": "Ar Ramadi"},
                      {"label": "Ar Rutbah", "value": "Ar Rutbah"},
@@ -54,34 +50,29 @@ app.layout = html.Div([
                      {"label": "Zakho", "value": "Zakho"},
                      {"label": "Al Khalis", "value": "Al Khalis"},
                      {"label": "Al Miqdadiyah", "value": "Al Miqdadiyah"},
-                     {"label": "Ba`qubah", "value": "Ba`qubah"},
+                     {"label": "Baqubah", "value": "Baqubah"},
                      {"label": "Balad Ruz", "value": "Balad Ruz"},
                      {"label": "Khanaqin", "value": "Khanaqin"},
                      {"label": "Kifri", "value": "Kifri"},
-                     {"label": "Al Jadwal al Gharbi", "value": "Al Jadwal al Gharbi"},
                      {"label": "Karbala", "value": "Karbala"},
                      {"label": "Al Amarah", "value": "Al Amarah"},
                      {"label": "Al Kahla", "value": "Al Kahla"},
                      {"label": "Al Miamona", "value": "Al Miamona"},
                      {"label": "Al Mijar al Kabir", "value": "Al Mijar al Kabir"},
                      {"label": "Ali al Gharbi", "value": "Ali al Gharbi"},
-                     {"label": "Qal`at Salih", "value": "Qal`at Salih"},
+                     {"label": "Qalat Salih", "value": "Qalat Salih"},
                      {"label": "Tilkef", "value": "Tilkef"},
                      {"label": "Akre", "value": "Akre"},
                      {"label": "Al Hamdaniyah", "value": "Al Hamdaniyah"},
-                     {"label": "Al Shikhan", "value": "Al Shikhan"},
                      {"label": "Mosul", "value": "Mosul"},
-                     {"label": "Shekhan", "value": "Shekhan"},
                      {"label": "Sinjar", "value": "Sinjar"},
                      {"label": "Talafar", "value": "Talafar"},
-                     {"label": "Al-Faris", "value": "Al-Faris"},
                      {"label": "Al Door", "value": "Al Door"},
                      {"label": "Al Shirkat", "value": "Al Shirkat"},
                      {"label": "Balad", "value": "Balad"},
                      {"label": "Bayji", "value": "Bayji"},
                      {"label": "Samarra", "value": "Samarra"},
                      {"label": "Tikrit", "value": "Tikrit"},
-                     {"label": "Touz Hourmato", "value": "Touz Hourmato"},
                      {"label": "Al Hayy", "value": "Al Hayy"},
                      {"label": "Al Kut", "value": "Al Kut"},
                      {"label": "As Suwayrah", "value": "As Suwayrah"},
@@ -123,7 +114,7 @@ app.layout = html.Div([
                      {"label": "Daquq", "value": "Daquq"},
                      {"label": "Haweeja", "value": "Haweeja"},
                      {"label": "Kirkuk", "value": "Kirkuk"},
-                     {"label": "Al-Mada'in", "value": "Al-Mada'in"},
+                     {"label": "Al Madain", "value": "Al Madain"},
                      {"label": "Al Hashimiyah", "value": "Al Hashimiyah"},
                      {"label": "Al Hillah", "value": "Al Hillah"},
                      {"label": "Al Mahawil", "value": "Al Mahawil"},
@@ -137,7 +128,9 @@ app.layout = html.Div([
 
     html.Div(id='output_container', children=[]),
     html.Br(),
-    html.P("This graph represents a change in baseline measurement of Facebook users' physical movement in various regions of Iraq. The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."),
+    html.P("This graph represents a change in baseline measurement of Facebook users' physical movement in various regions of Iraq. "
+           "The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions. In addition, Armed Conflict Location & Event Data Project data"
+           "has been added by region for comparison."),
     html.Br(),
     html.Link("Data Source", href="https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.Br(),
@@ -164,8 +157,12 @@ def update_graph(option_slctd):
     dff = dff[dff["Region"] == option_slctd]
 
     # Plotly Express
-    fig = px.bar(dff, x='Date', y='Baseline Movement Deviation')
-
+    fig = px.bar(dff, x='Date', y='Baseline Movement Deviation', color='Baseline Movement Deviation',
+                 title="Test Title 1")
+    fig2 = px.bar(dff, x='Date', y='Attacks')
+    fig3 = px.scatter(dff, x='Date', y='Attacks', size='Dsize')
+    fig.add_trace(fig2.data[0])
+    fig.add_trace(fig3.data[0])
     # Plotly Graph Objects (GO)
     # fig = go.Figure(
     #     data=[go.Choropleth(
