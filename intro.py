@@ -131,7 +131,7 @@ app.layout = html.Div([
     html.P("This graph represents a change in baseline measurement of Facebook users' physical movement in various regions of Iraq. "
            "The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."
            "In addition, Armed Conflict Location & Event Data Project data"
-           " has been added by region for comparison and analysis."),
+           " has been added by region for comparison and analysis. The red dots represent an attack or disturbance as coded by ACLED."),
     html.P("Data Sources:"),
     html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.P("https://acleddata.com/"),
