@@ -122,7 +122,7 @@ app.layout = html.Div([
                      {"label": "Mahmudiya", "value": "Mahmudiya"}],
 
                  multi=False,
-                 value='Anah',
+                 value='Abu Ghraib',
                  style={'width': "40%"}
                  ),
 
@@ -157,8 +157,7 @@ def update_graph(option_slctd):
     dff = dff[dff["Region"] == option_slctd]
 
     # Plotly Express
-    fig = px.bar(dff, x='Date', y='Baseline Movement Deviation', color='Baseline Movement Deviation',
-                 title="Test Title 1")
+    fig = px.bar(dff, x='Date', y='Baseline Movement Deviation', color='Baseline Movement Deviation')
     fig2 = px.bar(dff, x='Date', y='Attacks')
     fig3 = px.scatter(dff, x='Date', y='Attacks', size='Dsize')
     fig.add_trace(fig2.data[0])
