@@ -129,12 +129,15 @@ app.layout = html.Div([
     html.Div(id='output_container', children=[]),
     html.Br(),
     html.P("This graph represents a change in baseline measurement of Facebook users' physical movement in various regions of Iraq. "
-           "The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions. In addition, Armed Conflict Location & Event Data Project data"
-           "has been added by region for comparison."),
+           "The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."
+           "In addition, Armed Conflict Location & Event Data Project data"
+           " has been added by region for comparison and analysis."),
     html.Br(),
-    html.Link("Data Source", href="https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
+    html.P("Data Sources:"),
     html.Br(),
-
+    html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
+    html.Br(),
+    html.P("https://acleddata.com/")
     dcc.Graph(id='iraq_chart', figure={})
 
 ])
