@@ -137,7 +137,7 @@ app.layout = html.Div([
     html.Br(),
     html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.Br(),
-    html.P("https://acleddata.com/")
+    html.P("https://acleddata.com/"),
     dcc.Graph(id='iraq_chart', figure={})
 
 ])
