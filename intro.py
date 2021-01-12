@@ -158,11 +158,14 @@ def update_graph(option_slctd):
     dff = dff[dff["Region"] == option_slctd]
 
     # Plotly Express
-    fig = px.bar(dff, x='Date', y='Baseline Movement Deviation', color='Baseline Movement Deviation')
-    fig2 = px.bar(dff, x='Date', y='Attacks')
-    fig3 = px.scatter(dff, x='Date', y='Attacks', size='Dsize')
+    fig = px.bar(dff, x='Date', y='Baseline Movement Deviation', color_discrete_sequence=["blue"])
+    fig2 = px.bar(dff, x='Date', y='Attacks', color_discrete_sequence=["red"])
+    fig3 = px.scatter(dff, x='Date', y='Attacks', size='Dsize', color_discrete_sequence=["red"])
     fig.add_trace(fig2.data[0])
     fig.add_trace(fig3.data[0])
+    fig.update_traces(marker=dict(size=12, color='Red', line=dict(width=2, color='DarkSlateGrey')),
+                      selector=dict(mode='markers'))
+
     # Plotly Graph Objects (GO)
     # fig = go.Figure(
     #     data=[go.Choropleth(
