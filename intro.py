@@ -143,7 +143,7 @@ app.layout = html.Div([
     html.P("This graph represents a change in baseline measurement of Facebook users' physical movement in various regions of Iraq. "
            "The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."
            "In addition, Armed Conflict Location & Event Data Project data"
-           " has been added by region for comparison and analysis. The red dots represent an attack or disturbance as coded by ACLED."),
+           " has been added by region for comparison and analysis. Each red dot represent an attack or disturbance as coded by ACLED."),
     html.P("Data Sources:"),
     html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.P("https://acleddata.com/"),
@@ -167,34 +167,23 @@ def update_graph(option_slctd):
     container = "The region chosen by user was: {}".format(option_slctd)
 
     dff = df.copy()
-    dff = dff[dff["Region"] == option_slctd]
+    dff = dff[dff["region"] == option_slctd]
 
     # Plotly Express
-    fig = px.bar(dff, x='Date', y='Baseline Movement Deviation', color_discrete_sequence=["blue"])
-    fig2 = px.bar(dff, x='Date', y='Attacks', color_discrete_sequence=["red"])
-    fig3 = px.scatter(dff, x='Date', y='Attacks', size='Dsize', color_discrete_sequence=["red"])
-    fig.add_trace(fig2.data[0])
-    fig.add_trace(fig3.data[0])
+    fig = px.area(dff, x='date', y='movdev', labels={'date': 'Date', 'movdev': 'Baseline User Movement Deviation'})
+    fig.add_trace((go.Scatter(x=dff.date, y=dff.attacks, mode='markers', name='Attacks', text=dff.attacktype)))
+    fig.add_trace((go.Bar(x=dff.date, y=dff.staticusers, name='Baseline Static User Deviation')))
+
+    fig.update_layout(legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1
+    ))
+
     fig.update_traces(marker=dict(size=12, color='Red', line=dict(width=2, color='DarkSlateGrey')),
                       selector=dict(mode='markers'))
-
-    # Plotly Graph Objects (GO)
-    # fig = go.Figure(
-    #     data=[go.Choropleth(
-    #         locationmode='USA-states',
-    #         locations=dff['state_code'],
-    #         z=dff["Pct of Colonies Impacted"].astype(float),
-    #         colorscale='Reds',
-    #     )]
-    # )
-    #
-    # fig.update_layout(
-    #     title_text="Bees Affected by Mites in the USA",
-    #     title_xanchor="center",
-    #     title_font=dict(size=24),
-    #     title_x=0.5,
-    #     geo=dict(scope='usa'),
-    # )
 
     return container, fig
 
