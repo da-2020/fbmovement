@@ -140,15 +140,25 @@ app.layout = html.Div([
 
     html.Div(id='output_container', children=[]),
     html.Br(),
-    html.P("This graph represents a change in baseline measurement of Facebook users' physical movement in various regions of Iraq. "
+    html.P("This graph represents the change in a baseline measurement of Facebook users' physical movement in various regions of Iraq. "
            "The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."
-           "In addition, Armed Conflict Location & Event Data Project data"
-           " has been added by region for comparison and analysis. Each red dot represent an attack or disturbance as coded by ACLED."),
+           "In addition, Armed Conflict Location & Event Data Project (ACLED) data"
+           " has been added by region for comparison and analysis. Each red dot represent an attack or disturbance as coded by ACLED."
+           "Finally, the change in a baseline measurement of static Facebook users is depicted for additional context."),
     html.P("Data Sources:"),
     html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.P("https://acleddata.com/"),
     html.Br(),
-    dcc.Graph(id='iraq_chart', figure={})
+    dcc.Graph(id='iraq_chart', figure={
+'data': [{
+    'x': ['2015-01-01', '2015-01-10 15:30:12', '2015-04-01'],
+    'y': [2, 1, 5]
+}],
+'layout': {
+    'xaxis': {
+        'tickformat': '%d/%m'
+    }
+}})
 
 ])
 
