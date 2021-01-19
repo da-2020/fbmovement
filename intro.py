@@ -144,21 +144,12 @@ app.layout = html.Div([
            "The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."
            "In addition, Armed Conflict Location & Event Data Project (ACLED) data"
            " has been added by region for comparison and analysis. Each red dot represent an attack or disturbance as coded by ACLED."
-           "Finally, the change in a baseline measurement of static Facebook users is depicted for additional context."),
+           " Finally, the change in a baseline measurement of static Facebook users is depicted for additional context."),
     html.P("Data Sources:"),
     html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.P("https://acleddata.com/"),
     html.Br(),
-    dcc.Graph(id='iraq_chart', figure={
-'data': [{
-    'x': ['2015-01-01', '2015-01-10 15:30:12', '2015-04-01'],
-    'y': [2, 1, 5]
-}],
-'layout': {
-    'xaxis': {
-        'tickformat': '%d/%m'
-    }
-}})
+    dcc.Graph(id='iraq_chart', figure={})
 
 ])
 
@@ -181,7 +172,7 @@ def update_graph(option_slctd):
 
     # Plotly Express
     fig = px.area(dff, x='date', y='movdev', labels={'date': 'Date', 'movdev': 'Baseline User Movement Deviation'})
-    fig.add_trace((go.Scatter(x=dff.date, y=dff.attacks, mode='markers', name='Attacks', text=dff.attacktype)))
+    fig.add_trace((go.Scatter(x=dff.date, y=dff.attacks, mode='markers', name='Attacks/Disturbances', text=dff.attacktype)))
     fig.add_trace((go.Bar(x=dff.date, y=dff.staticusers, name='Baseline Static User Deviation')))
 
     fig.update_layout(legend=dict(
