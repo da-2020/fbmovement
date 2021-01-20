@@ -172,7 +172,7 @@ def update_graph(option_slctd):
     dff = dff[dff["region"] == option_slctd]
 
     # Plotly Express
-    fig = px.area(dff, x='date', y='movdev', labels={'date': 'Date', 'movdev': 'Baseline User Movement Deviation'})
+    fig = px.area(dff, x='date', y='movdev', labels={'date': 'Date', 'movdev': 'Baseline User Movement Deviation'}, template="plotly_dark")
     fig.add_trace((go.Scatter(x=dff.date, y=dff.attacks, mode='markers', name='Attacks/Disturbances', text=dff.attacktype)))
     fig.add_trace((go.Bar(x=dff.date, y=dff.staticusers, name='Baseline Static User Deviation')))
 
