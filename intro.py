@@ -14,7 +14,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 server = app.server
 # ------------------------------------------------------------------------------
 # Import and clean data (importing csv into pandas)
@@ -138,7 +138,7 @@ children=[
     html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.P("https://acleddata.com/"),
     html.Br(),
-    dbc.Spinner(children=[dcc.Graph(id='iraq_chart', figure={})], size="lg", color="primary", type="border", fullscreen=True,),
+    dbc.Spinner(children=[dcc.Graph(id='iraq_chart', figure={})], size="lg", color="primary", type="grow", fullscreen=True,),
     ]
 )
 
