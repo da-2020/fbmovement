@@ -136,7 +136,7 @@ children=[
            " Finally, the change in a baseline measurement of static Facebook users is depicted for additional context."),
     html.P("Data Sources:"),
     html.A("Facebook Data", href="https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
-    html.A("ACLED Data", href="https://acleddata.com/"),
+    html.A(" ACLED Data", href="https://acleddata.com/"),
     html.Br(),
     dbc.Spinner(children=[dcc.Graph(id='iraq_chart', figure={})], size="lg", color="dark", type="grow", fullscreen=True,),
     ]
