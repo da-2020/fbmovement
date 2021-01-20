@@ -14,19 +14,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 
-# external CSS stylesheets
-#external_stylesheets = [
-#    'https://codepen.io/chriddyp/pen/bWLwgP.css',
-#    {
-#        'href': 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
-#        'rel': 'stylesheet',
-#        'integrity': 'sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO',
-#        'crossorigin': 'anonymous'
-#    }
-#]
-#, external_stylesheets=external_stylesheets
-
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 server = app.server
 # ------------------------------------------------------------------------------
 # Import and clean data (importing csv into pandas)
