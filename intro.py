@@ -138,7 +138,7 @@ children=[
     html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.P("https://acleddata.com/"),
     html.Br(),
-    dbc.Spinner(children=[dcc.Graph(id='iraq_chart', figure={})], size="lg", color="primary", type="grow", fullscreen=True,),
+    dbc.Spinner(children=[dcc.Graph(id='iraq_chart', figure={})], size="lg", color="dark", type="grow", fullscreen=True,),
     ]
 )
 
