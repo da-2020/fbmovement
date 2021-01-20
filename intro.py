@@ -26,7 +26,7 @@ from dash.dependencies import Input, Output
 #]
 #, external_stylesheets=external_stylesheets
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX])
 server = app.server
 # ------------------------------------------------------------------------------
 # Import and clean data (importing csv into pandas)
@@ -34,8 +34,8 @@ df = pd.read_csv("ir_master_fbdat_mod1_final.csv")
 
 # ------------------------------------------------------------------------------
 # App layout
-app.layout = html.Div([
-
+app.layout = html.Div(
+children=[
     html.H1("Iraq Facebook Users Change In Movement From FEB2020 Baseline and ACLED Attack Data By Region ", style={'text-align': 'center'}),
     html.Br(),
     html.H3("Daniel Allen", style={'text-align': 'center'}),
@@ -150,9 +150,9 @@ app.layout = html.Div([
     html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.P("https://acleddata.com/"),
     html.Br(),
-    dcc.Graph(id='iraq_chart', figure={})
-
-])
+    dbc.Spinner(children=[dcc.Graph(id='iraq_chart', figure={})], size="lg", color="primary", type="border", fullscreen=True,),
+    ]
+)
 
 
 # ------------------------------------------------------------------------------
