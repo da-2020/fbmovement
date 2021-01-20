@@ -34,8 +34,7 @@ df = pd.read_csv("ir_master_fbdat_mod1_final.csv")
 
 # ------------------------------------------------------------------------------
 # App layout
-app.layout = html.Div(
-    children=[
+app.layout = html.Div([
 
     html.H1("Iraq Facebook Users Change In Movement From FEB2020 Baseline and ACLED Attack Data By Region ", style={'text-align': 'center'}),
     html.Br(),
@@ -151,15 +150,9 @@ app.layout = html.Div(
     html.P("https://data.humdata.org/dataset/c3429f0e-651b-4788-bb2f-4adbf222c90e"),
     html.P("https://acleddata.com/"),
     html.Br(),
+    dcc.Graph(id='iraq_chart', figure={})
 
-
-        dbc.Row(dbc.Col(
-            dbc.Spinner(children=[dcc.Graph(id='iraq_chart', figure={})], size="lg", color="primary", type="border", fullscreen=True,),
-            width={'size': 12, 'offset': 0}),
-        ),
-
-    ]
-)
+])
 
 
 # ------------------------------------------------------------------------------
