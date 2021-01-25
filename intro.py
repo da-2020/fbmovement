@@ -131,7 +131,7 @@ children=[
     html.Br(),
     html.P("This graph represents the change in a baseline measurement of Facebook users' physical movement in various regions of Iraq. "
            "The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."
-           "In addition, Armed Conflict Location & Event Data Project (ACLED) data"
+           " In addition, Armed Conflict Location & Event Data Project (ACLED) data"
            " has been added by region for comparison and analysis. Each red dot represent an attack or disturbance as coded by ACLED."
            " Finally, the change in a baseline measurement of static Facebook users is depicted for additional context."),
     html.P("Data Sources:"),
@@ -163,7 +163,7 @@ def update_graph(option_slctd):
     fig = px.area(dff, x='date', y='movdev', labels={'date': 'Date', 'movdev': 'Baseline User Movement Deviation'},
                   template="plotly_dark")
     fig.add_trace((go.Scatter(x=dff.date, y=dff.staticusers, name='Baseline Static User Deviation', fill='tozeroy',
-                              line=dict(color='#00CC96', width=2))))
+                              line=dict(color='#565656', width=2))))
     fig.add_trace(
         (go.Scatter(x=dff.date, y=dff.attacks, mode='markers', name='Attacks/Disturbances', text=dff.attacktype)))
 
