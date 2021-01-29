@@ -158,8 +158,8 @@ def update_graph(option_slctd):
 
     dff = df.copy()
     dff = dff[dff["region"] == option_slctd]
-
-    df2 = dff[['movdev', 'attacksbool']].copy()
+    df1 = dff[dff["region"] == option_slctd]
+    df2 = df1[['movdev', 'attacksbool']].copy()
     statdat = df2.corr()
     statcon = "The Pearsons R correlation of this data is: {}".format(statdat)
 
