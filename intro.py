@@ -159,6 +159,10 @@ def update_graph(option_slctd):
     dff = df.copy()
     dff = dff[dff["region"] == option_slctd]
 
+    df2 = dff[['movdev', 'attacksbool']].copy()
+    statdat = df2.corr()
+    statcon = "The Pearsons R correlation of this data is: {}".format(statdat)
+
     # Plotly Express
     fig = px.area(dff, x='date', y='movdev', labels={'date': 'Date', 'movdev': 'Baseline User Movement Deviation'},
                   template="plotly_dark")
@@ -178,7 +182,7 @@ def update_graph(option_slctd):
     fig.update_traces(marker=dict(size=12, color='Red', line=dict(width=2, color='DarkSlateGrey')),
                       selector=dict(mode='markers'))
 
-    return container, fig
+    return container, statcon, fig
 
 
 # ------------------------------------------------------------------------------
