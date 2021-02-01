@@ -13,6 +13,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
+from scipy import stats
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 server = app.server
@@ -129,6 +130,7 @@ children=[
 
     html.Div(id='output_container', children=[]),
     html.Div(id='stat_container', children=[]),
+    html.Div(id='stat_container2', children=[]),
     html.Br(),
     html.P("This graph represents the change in a baseline measurement of Facebook users' physical movement in various regions of Iraq. "
            "The baseline measurement was taken in Feb. 2020, before COVID19 movement restrictions."
@@ -149,7 +151,8 @@ children=[
 @app.callback(
     [Output(component_id='output_container', component_property='children'),
      Output(component_id='iraq_chart', component_property='figure'),
-     Output(component_id='stat_container', component_property='children')],
+     Output(component_id='stat_container', component_property='children'),
+     Output(component_id='stat_container2', component_property='children')],
     [Input(component_id='slct_region', component_property='value')]
 )
 def update_graph(option_slctd):
@@ -163,7 +166,9 @@ def update_graph(option_slctd):
     df1 = dff[dff["region"] == option_slctd].copy()
     df2 = df1[['movdev', 'attacksbool']]
     statdat = df2.corr()
+    F, p = stats.f_oneway(df2.movdev, df2.attacksbool)
     statcon = "The Pearsons R correlation of this data is: {}".format(statdat)
+    statcon2 = "The ANOVA One Way of this data is: {}".format(F)
 
     # Plotly Express
     fig = px.area(dff, x='date', y='movdev', labels={'date': 'Date', 'movdev': 'Baseline User Movement Deviation'},
@@ -185,7 +190,7 @@ def update_graph(option_slctd):
                       selector=dict(mode='markers'))
 
 #    return container, fig
-    return container, fig, statcon
+    return container, fig, statcon, statcon2
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
