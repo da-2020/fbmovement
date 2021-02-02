@@ -129,7 +129,7 @@ children=[
                  ),
 
     html.Div(id='output_container', children=[]),
-    html.Div(id='stat_container', children=[]),
+    html.Table(id='stat_container', children=[]),
     html.Div(id='stat_container2', children=[]),
     html.Br(),
     html.P("This graph represents the change in a baseline measurement of Facebook users' physical movement in various regions of Iraq. "
@@ -168,7 +168,7 @@ def update_graph(option_slctd):
     statdat = df2.corr()
     F, p = stats.f_oneway(df2.movdev, df2.attacksbool)
     statcon = "The Pearsons R correlation of this data is: {}".format(statdat)
-    statcon2 = "The ANOVA One Way of this data is: {}".format(F)
+    statcon2 = "The ANOVA One Way correlation of this data is: {}".format(F)
 
     # Plotly Express
     fig = px.area(dff, x='date', y='movdev', labels={'date': 'Date', 'movdev': 'Baseline User Movement Deviation'},
