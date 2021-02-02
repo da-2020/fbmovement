@@ -130,12 +130,7 @@ children=[
                  ),
 
     html.Div(id='output_container', children=[]),
-#    html.Table(id='stat_container', children=[]
-    dash_table.DataTable(
-        id='table',
-        columns=[{"name": i} for i in statdat.columns],
-        data=statdat.to_dict('records'),
-    ),
+    html.Table(id='stat_container', children=[]),
     html.Div(id='stat_container2', children=[]),
     html.Br(),
     html.P("This graph represents the change in a baseline measurement of Facebook users' physical movement in various regions of Iraq. "
