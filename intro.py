@@ -12,6 +12,7 @@ import dash  # (version 1.12.0) pip install dash
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
+import dash_table
 from dash.dependencies import Input, Output
 from scipy import stats
 
@@ -129,7 +130,12 @@ children=[
                  ),
 
     html.Div(id='output_container', children=[]),
-    html.Table(id='stat_container', children=[]),
+#    html.Table(id='stat_container', children=[]
+    dash_table.DataTable(
+        id='table',
+        columns=[{"name": i} for i in statdat.columns],
+        data=statdat.to_dict('records'),
+    ),
     html.Div(id='stat_container2', children=[]),
     html.Br(),
     html.P("This graph represents the change in a baseline measurement of Facebook users' physical movement in various regions of Iraq. "
@@ -165,6 +171,7 @@ def update_graph(option_slctd):
     dff = dff[dff["region"] == option_slctd]
     df1 = dff[dff["region"] == option_slctd].copy()
     df2 = df1[['movdev', 'attacksbool']]
+
     statdat = df2.corr()
     F, p = stats.f_oneway(df2.movdev, df2.attacksbool)
     statcon = "The Pearsons R correlation of this data is: {}".format(statdat)
